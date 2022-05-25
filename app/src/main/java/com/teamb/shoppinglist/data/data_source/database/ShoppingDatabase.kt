@@ -13,7 +13,6 @@ import com.teamb.shoppinglist.domain.model.ShoppingItem
 )
 abstract class ShoppingDatabase : RoomDatabase() {
     abstract val shoppingDao: ShoppingDao
-
     companion object {
         const val DATABASE_NAME = "shopping_items_db"
     }

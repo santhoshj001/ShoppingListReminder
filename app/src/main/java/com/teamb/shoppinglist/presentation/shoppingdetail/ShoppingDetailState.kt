@@ -1,9 +1,12 @@
 package com.teamb.shoppinglist.presentation.shoppingdetail
 
-import android.service.quicksettings.Tile
-import com.teamb.shoppinglist.domain.model.ShoppingItem
-
 data class ShoppingDetailState(
-    val item: ShoppingItem? = null,
-    val tile: String = "Shopping Details"
+
+    val tile: String = "Shopping Details",
+    val itemName: String = "",
+    val itemNameError: String? = null,
+    val quantity: String = "",
+    val quantityError: String? = null,
+    val isRemoveEnabled: Boolean = false
+
 )

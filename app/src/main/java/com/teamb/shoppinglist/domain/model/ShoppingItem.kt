@@ -8,5 +8,6 @@ data class ShoppingItem(
     val name: String,
     val quantity: Int,
     val timestamp: Long,
-    @PrimaryKey val id: Int
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0
 )
