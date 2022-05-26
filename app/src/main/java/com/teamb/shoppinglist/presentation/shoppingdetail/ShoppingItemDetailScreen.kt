@@ -104,7 +104,7 @@ fun ShoppingItemDetailScreen(
             }
 
             var expanded by remember { mutableStateOf(false) }
-            val selectedOptionText = state.selectedOption
+            val selectedOptionText = state.selectedUnitOption
 
             ExposedDropdownMenuBox(
                 expanded = expanded, onExpandedChange = {
@@ -152,7 +152,7 @@ fun ShoppingItemDetailScreen(
                 if (state.isRemoveEnabled) {
                     OutlinedButton(
 
-                        onClick = { },
+                        onClick = { viewModel.onEvent(ShoppingDetailFormEvent.RemoveItem)},
                         modifier = Modifier
                             .weight(1f)
                     ) {

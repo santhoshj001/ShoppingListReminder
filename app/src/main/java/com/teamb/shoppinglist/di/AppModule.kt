@@ -42,7 +42,8 @@ object AppModule {
             addShoppingItemUseCase = AddShoppingItemUseCase(repository = repository),
             deleteShoppingItemUseCase = DeleteShoppingItemUseCase(repository = repository),
             updateShoppingItemUseCase = UpdateShoppingItemUseCase(repository = repository),
-            getShoppingItemsUseCase = GetShoppingItemsUseCase(repository = repository)
+            getShoppingItemsUseCase = GetShoppingItemsUseCase(repository = repository),
+            getShoppingItemByIdUseCase = GetShoppingItemByIdUseCase(repository)
         )
     }
 

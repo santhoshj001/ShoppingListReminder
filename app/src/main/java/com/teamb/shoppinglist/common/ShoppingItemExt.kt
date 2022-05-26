@@ -17,7 +17,7 @@ fun ShoppingItemDetailState.toShoppingItem(): ShoppingItem {
         id = 0,
         name = itemName,
         quantity = quantity,
-        unit = selectedOption,
+        unit = selectedUnitOption,
         timestamp = System.currentTimeMillis()
     )
 }

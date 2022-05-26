@@ -32,7 +32,7 @@ fun ShoppingListScreen(
                     })
                 }
                 items(items = state.items) {
-                    ShoppingListItem(it)
+                    ShoppingListItem(it, navController)
                 }
             }
         }

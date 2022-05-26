@@ -1,7 +1,7 @@
 package com.teamb.shoppinglist.presentation.shoppingdetail
 
 data class ShoppingItemDetailState(
-
+    val id: Int? = null,
     val tile: String = "Shopping Details",
     val itemName: String = "",
     val itemNameError: String? = null,
@@ -15,5 +15,5 @@ data class ShoppingItemDetailState(
         Units.MilliLitre,
         Units.Count
     ),
-    val selectedOption: String = options.first().UnitName
+    val selectedUnitOption: String = options.first().UnitName
 )
