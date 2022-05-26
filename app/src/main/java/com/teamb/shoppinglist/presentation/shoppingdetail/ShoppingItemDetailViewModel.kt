@@ -16,12 +16,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ShoppingDetailViewModel @Inject constructor(
+class ShoppingItemDetailViewModel @Inject constructor(
     private val shoppingUseCase: ShoppingUseCase,
     private val validationUseCase: ValidationUseCase
 ) : ViewModel() {
 
-    var state by mutableStateOf(ShoppingDetailState())
+    var state by mutableStateOf(ShoppingItemDetailState())
         private set
 
     private val validationEventChannel = Channel<ValidationEvent>()

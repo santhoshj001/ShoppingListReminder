@@ -1,6 +1,6 @@
 package com.teamb.shoppinglist.presentation.shoppingdetail
 
-data class ShoppingDetailState(
+data class ShoppingItemDetailState(
 
     val tile: String = "Shopping Details",
     val itemName: String = "",

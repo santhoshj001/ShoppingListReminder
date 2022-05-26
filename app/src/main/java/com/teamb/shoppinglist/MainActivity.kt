@@ -3,7 +3,6 @@ package com.teamb.shoppinglist
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
@@ -11,8 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.teamb.shoppinglist.presentation.Screen
-import com.teamb.shoppinglist.presentation.components.ShoppingItemDetailScreen
-import com.teamb.shoppinglist.presentation.shoppingdetail.ShoppingDetailViewModel
+import com.teamb.shoppinglist.presentation.shoppingdetail.ShoppingItemDetailScreen
 import com.teamb.shoppinglist.presentation.shoppinglist.ShoppingListScreen
 import com.teamb.shoppinglist.ui.theme.ShoppingListTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,10 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val viewModel: ShoppingDetailViewModel by viewModels()
         setContent {
-            ShoppingListTheme(darkTheme = true) {
+            ShoppingListTheme() {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -41,7 +37,7 @@ class MainActivity : ComponentActivity() {
                         composable(
                             Screen.ShoppingDetailScreen.route
                         ) {
-                            ShoppingItemDetailScreen()
+                            ShoppingItemDetailScreen(navController =navController)
                         }
                     }
                 }
