@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.teamb.shoppinglist.domain.model.ShoppingItem
 import com.teamb.shoppinglist.domain.usecase.ShoppingUseCase
 import com.teamb.shoppinglist.domain.usecase.validation.ValidationUseCase
-import com.teamb.shoppinglist.presentation.ShoppingDetailFormEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -35,6 +34,9 @@ class ShoppingItemDetailViewModel @Inject constructor(
             is ShoppingDetailFormEvent.QuantityChanged -> {
                 state = state.copy(quantity = event.quantity)
             }
+            is ShoppingDetailFormEvent.UnitChanged -> {
+                state = state.copy(selectedOption = event.UnitName)
+            }
             ShoppingDetailFormEvent.RemoveItem -> onRemoveItem()
             ShoppingDetailFormEvent.SaveItem -> onSaveItem()
         }
@@ -58,7 +60,12 @@ class ShoppingItemDetailViewModel @Inject constructor(
         }
         viewModelScope.launch {
             shoppingUseCase.addShoppingItemUseCase(
-                ShoppingItem(state.itemName, state.quantity.toInt(), System.currentTimeMillis())
+                ShoppingItem(
+                    name = state.itemName,
+                    quantity = state.quantity.toInt(),
+                    timestamp = System.currentTimeMillis(),
+                    unit = state.selectedOption
+                )
             )
             validationEventChannel.send(ValidationEvent.Success)
         }

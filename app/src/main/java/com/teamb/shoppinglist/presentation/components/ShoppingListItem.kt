@@ -13,29 +13,21 @@ import com.teamb.shoppinglist.domain.model.ShoppingItem
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShoppingListItem(item: ShoppingItem) {
-
     Card(
         shape = RoundedCornerShape(12.dp),
         modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp, top = 4.dp, bottom = 4.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
             .fillMaxWidth()
     ) {
-
         Row(Modifier.padding(12.dp)) {
             Text(
                 text = item.name,
                 style = MaterialTheme.typography.bodyLarge,
             )
             Text(
-
                 text = item.quantity.toString(),
                 style = MaterialTheme.typography.bodyLarge,
-
-                )
-
-
+            )
         }
     }
-
-
 }
