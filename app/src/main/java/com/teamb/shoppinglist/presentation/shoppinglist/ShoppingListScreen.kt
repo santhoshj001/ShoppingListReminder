@@ -24,10 +24,13 @@ fun ShoppingListScreen(
                 Icon(Icons.Outlined.Add, "")
             }
         }, content = { innerPadding ->
-            CenterAlignedTopAppBar({
-                Text(text = "Shopping Items")
-            })
+
             LazyColumn(contentPadding = innerPadding) {
+                item {
+                    CenterAlignedTopAppBar({
+                        Text(text = "Shopping Items")
+                    })
+                }
                 items(items = state.items) {
                     ShoppingListItem(it)
                 }

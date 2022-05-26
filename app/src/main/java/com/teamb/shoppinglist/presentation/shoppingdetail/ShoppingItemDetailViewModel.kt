@@ -32,7 +32,7 @@ class ShoppingItemDetailViewModel @Inject constructor(
                 state = state.copy(itemName = event.itemName)
             }
             is ShoppingDetailFormEvent.QuantityChanged -> {
-                state = state.copy(quantity = event.quantity)
+                state = state.copy(itemQuantity = event.quantity)
             }
             is ShoppingDetailFormEvent.UnitChanged -> {
                 state = state.copy(selectedOption = event.UnitName)
@@ -48,13 +48,13 @@ class ShoppingItemDetailViewModel @Inject constructor(
 
     private fun onSaveItem() {
         val nameResult = validationUseCase.itemNameValidationUseCase(state.itemName)
-        val quantityResult = validationUseCase.itemQuantityValidationUseCase(state.quantity)
+        val quantityResult = validationUseCase.itemQuantityValidationUseCase(state.itemQuantity)
 
         val hasError = listOf(nameResult, quantityResult).any { !it.isSuccess }
         if (hasError) {
             state = state.copy(
                 itemNameError = nameResult.errorMessage,
-                quantityError = quantityResult.errorMessage
+                itemQuantityError = quantityResult.errorMessage
             )
             return
         }
@@ -62,7 +62,7 @@ class ShoppingItemDetailViewModel @Inject constructor(
             shoppingUseCase.addShoppingItemUseCase(
                 ShoppingItem(
                     name = state.itemName,
-                    quantity = state.quantity.toInt(),
+                    quantity = state.itemQuantity.toInt(),
                     timestamp = System.currentTimeMillis(),
                     unit = state.selectedOption
                 )

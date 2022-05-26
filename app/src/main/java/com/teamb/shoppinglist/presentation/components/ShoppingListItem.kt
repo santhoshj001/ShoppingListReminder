@@ -1,11 +1,14 @@
 package com.teamb.shoppinglist.presentation.components
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.teamb.shoppinglist.domain.model.ShoppingItem
@@ -16,18 +19,45 @@ fun ShoppingListItem(item: ShoppingItem) {
     Card(
         shape = RoundedCornerShape(12.dp),
         modifier = Modifier
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = 8.dp, vertical = 4.dp)
             .fillMaxWidth()
     ) {
-        Row(Modifier.padding(12.dp)) {
-            Text(
-                text = item.name,
-                style = MaterialTheme.typography.bodyLarge,
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+
+            ) {
+
+                Text(
+                    text = item.name,
+                    style = MaterialTheme.typography.titleLarge,
+                )
+                AssistChip(
+                    onClick = {},
+                    label = { Text("${item.quantity} ${item.unit}") }
+                )
+            }
+
+            AssistChip(
+                onClick = {},
+                label = { Text("Edit") },
+                leadingIcon = {
+                    Icon(Icons.Outlined.Edit, contentDescription = "Edit")
+                }
             )
-            Text(
-                text = item.quantity.toString(),
-                style = MaterialTheme.typography.bodyLarge,
-            )
+
+            /*AssistChip(
+                onClick = {},
+                label = { Text("Done") },
+                leadingIcon = {
+                    Icon(Icons.Default.Check, contentDescription = "done")
+                }
+            )*/
         }
     }
 }

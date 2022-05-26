@@ -7,13 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class GetShoppingItemsUseCase(private val repository: ShoppingRepository) {
-    operator fun invoke(): Flow<Resource<List<ShoppingItem>>> = flow {
-        try {
-            emit(Resource.Loading())
-            val items: List<ShoppingItem> = repository.getShoppingItems()
-            emit(Resource.Success(items))
-        } catch (e: Exception) {
-            emit(Resource.Error(message = e.localizedMessage))
-        }
+    operator fun invoke(): Flow<List<ShoppingItem>>{
+       return repository.getShoppingItems()
     }
 }

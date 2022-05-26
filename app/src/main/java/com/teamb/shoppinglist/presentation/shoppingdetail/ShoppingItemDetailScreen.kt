@@ -81,22 +81,22 @@ fun ShoppingItemDetailScreen(
                 )
             }
             OutlinedTextField(
-                value = state.quantity,
+                value = state.itemQuantity,
                 onValueChange = {
                     viewModel.onEvent(
                         ShoppingDetailFormEvent.QuantityChanged(it)
                     )
                 },
-                isError = state.quantityError != null,
+                isError = state.itemQuantityError != null,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 label = { Text("Item Quantity") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(12.dp)
             )
-            if (state.quantityError != null && state.quantityError.isNotBlank()) {
+            if (state.itemQuantityError != null && state.itemQuantityError.isNotBlank()) {
                 Text(
-                    text = state.quantityError,
+                    text = state.itemQuantityError,
                     color = MaterialTheme.colorScheme.error,
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(start = 16.dp, bottom = 16.dp)

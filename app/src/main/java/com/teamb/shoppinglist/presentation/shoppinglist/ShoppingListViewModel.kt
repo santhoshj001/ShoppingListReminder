@@ -5,9 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.teamb.shoppinglist.common.Resource
 import com.teamb.shoppinglist.domain.usecase.ShoppingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -19,24 +19,19 @@ class ShoppingListViewModel @Inject constructor(
     var state by mutableStateOf(ShoppingListState())
         private set
 
+    private var getShoppingItemsJob: Job? = null
+
     init {
         getShoppingItems()
     }
 
     private fun getShoppingItems() {
-        shoppingItemUseCase.getShoppingItemsUseCase().onEach { resource ->
-            when (resource) {
-                is Resource.Error -> {
-                    state = ShoppingListState(error = "no items found")
-                }
-                is Resource.Loading -> {
-                    state = ShoppingListState(isLoading = true)
-                }
-                is Resource.Success -> {
-                    resource.data?.let { items ->
-                        state = ShoppingListState(items = items)
-                    }
-                }
+        getShoppingItemsJob?.cancel()
+        getShoppingItemsJob = shoppingItemUseCase.getShoppingItemsUseCase().onEach { list ->
+            if (list.isEmpty()) {
+                state = state.copy(isLoading = false, error = "no items Found")
+            } else {
+                state = state.copy(items = list)
             }
         }.launchIn(viewModelScope)
     }

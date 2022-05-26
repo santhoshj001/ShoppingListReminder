@@ -6,9 +6,10 @@ import com.teamb.shoppinglist.domain.repository.ShoppingRepository
 import kotlinx.coroutines.flow.Flow
 
 class ShoppingRepositoryImpl(private val dao: ShoppingDao) : ShoppingRepository {
-    override suspend fun getShoppingItems():List<ShoppingItem> {
+    override fun getShoppingItems(): Flow<List<ShoppingItem>> {
         return dao.getShoppingItems()
     }
+
 
     override suspend fun delete(item: ShoppingItem) {
         return dao.delete(item)
